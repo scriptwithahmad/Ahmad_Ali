@@ -30,6 +30,7 @@ export default async function handler(req, res) {
         console.log(error);
       }
 
+      
     case "PUT":
       try {
         const updateTodo = await todoModel.findByIdAndUpdate(
