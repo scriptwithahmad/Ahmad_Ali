@@ -20,14 +20,32 @@ export default async function handler(req, res) {
     const foundUser = await usersModel.findOne({ email });
 
     if (!foundUser) {
-        res.status(400).json({
-          success: false,
-          message: "Invalid email or password",
-        });
-        return;
-      }
-  
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password",
+      });
+    }
 
+    const AccessToken = await GenAccessToken({
+      id: foundUser._id,
+    });
+
+    res.setHeader(
+      "Set-Cookie",
+      serialize("AccessToken", AccessToken, {
+        path: "/",
+        httpOnly: true,
+      })
+    );
+
+    var user = {
+      id: foundUser._id,
+    };
+
+    res.status(201).json({
+      success: true,
+      message: "User Login Successfully!",
+    });
   } catch (error) {
     console.log(error);
   }

@@ -2,7 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-h1 {
-  color: #222;
-  font-size: 80px;
+body {
+  background: #FFFFFF;
+}
+
+.globalShadow {
+  /* background: white; */
+  box-shadow: rgba(145, 158, 171, 0.16) 0px 1px 2px 0px;
 }

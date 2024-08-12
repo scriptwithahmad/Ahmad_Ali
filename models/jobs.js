@@ -17,7 +17,7 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: [true, "Logo Required!"],
     },
-    experence: {
+    experience: {
       type: String,
       trim: true,
     },
