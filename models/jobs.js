@@ -15,7 +15,6 @@ const jobSchema = new mongoose.Schema(
     logo: {
       trim: true,
       type: String,
-      required: [true, "Logo Required!"],
     },
     experience: {
       type: String,
@@ -42,7 +41,7 @@ const jobSchema = new mongoose.Schema(
     companyUser: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "companines", // this is the name of the model
-      required: true,
+      // required: true,
     },
   },
   { timestamps: true }

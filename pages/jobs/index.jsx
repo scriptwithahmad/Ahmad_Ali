@@ -39,7 +39,7 @@ const index = () => {
               >
                 {["Edit", "Delete"].map((v, i) => {
                   return (
-                    <div className="flex items-center gap-1 hover:bg-gray-200 px-2 py-1 rounded-lg">
+                    <div className="flex items-center gap-1 hover:bg-gray-200 px-2 py-1 rounded-lg cursor-pointer">
                       <ViewIcon size={14} color={"#444"} />
                       <span className="text-gray-500 text-sm">{v}</span>
                     </div>
