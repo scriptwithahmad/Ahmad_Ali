@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import toast, { Toaster } from "react-hot-toast";
+import { PlusSignIcon } from "hugeicons-react";
+import { CldUploadWidget } from "next-cloudinary";
 
 const Index = () => {
   const [loading, setLoading] = useState(false);
@@ -213,6 +215,30 @@ const Index = () => {
               </option>
             ))}
           </select>
+
+          {/* Image ------------- */}
+          {/* ---------- Cloudinary Widget ---------- */}
+          {/* <CldUploadWidget
+            uploadPreset="back_nbody"
+            onSuccess={(results) => {
+              console.log(results);
+              // if (results.info?.secure_url && results.event === "success") {
+              //   setSelectedImage(results.info.secure_url);
+              // }
+            }}
+          >
+            {({ open }) => (
+              <button
+                type="button"
+                onClick={open}
+                className="flex items-center justify-center gap-2 p-2 h-24 w-24 rounded-md bg-gray-50 border-2 border-dotted hover:bg-gray-100"
+              >
+                <div className="bg-gray-500 p-1 rounded-full">
+                  <PlusSignIcon size={16} className="text-white" />
+                </div>
+              </button>
+            )}
+          </CldUploadWidget> */}
 
           <button
             type="submit"

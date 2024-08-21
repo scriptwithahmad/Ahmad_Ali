@@ -4,19 +4,42 @@ import {
   UserIcon,
   ViewIcon,
 } from "hugeicons-react";
-import React, { useState } from "react";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { format } from "timeago.js";
 
 const index = () => {
   const [open, setOpen] = useState(false);
+
+  const [data, setData] = useState([]);
+
+  // console.log(data);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/jobs");
+        const jsonData = await res.json();
+        setData(jsonData?.getJob);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
 
   return (
     <main className="h-screen content-center max-w-[1200px] m-auto">
       <h2 className="text-4xl font-semibold text-gray-700 mb-5">
         Explore Latest Jobs
       </h2>
-      <section className="grid grid-cols-4 gap-4">
-        {[1].map((v, i) => (
-          <div className="border border-dotted rounded-lg globalShadow relative overflow-hidden">
+      <section className="grid grid-cols-3 gap-4">
+        {data?.map((v, i) => (
+          <Link
+            key={i}
+            href={`/jobs/${v?._id}`}
+            className="border border-dotted rounded-lg globalShadow relative overflow-hidden"
+          >
             <div className="flex items-center justify-between">
               <div className="px-4 pt-4">
                 <img
@@ -39,7 +62,7 @@ const index = () => {
               >
                 {["Edit", "Delete"].map((v, i) => {
                   return (
-                    <div className="flex items-center gap-1 hover:bg-gray-200 px-2 py-1 rounded-lg cursor-pointer">
+                    <div className="flex items-center gap-2 hover:bg-gray-200 px-3 py-1.5 rounded-lg cursor-pointer">
                       <ViewIcon size={14} color={"#444"} />
                       <span className="text-gray-500 text-sm">{v}</span>
                     </div>
@@ -49,9 +72,9 @@ const index = () => {
             </div>
             {/* content */}
             <div className="border-b border-dotted p-5">
-              <h1 className="text-lg font-semibold">Software Engineer</h1>
+              <h1 className="text-lg font-semibold">{v?.title}</h1>
               <p className="py-2 text-gray-500 text-sm">
-                Posted data: 12 Aug 2024
+                Posted data: {format(v?.createdAt, "en_US")}
               </p>
               {/* how many user applied */}
               <div className="flex items-center gap-1">
@@ -61,18 +84,28 @@ const index = () => {
             </div>
             {/* content features */}
             <div className="grid grid-cols-2 justify-between p-5 text-gray-500 text-sm">
-              {["No Experience", "Full Time", "Negotiable", "CEO"].map(
-                (v, i) => {
-                  return (
-                    <div key={i} className="flex items-center gap-1">
-                      <SignalFull02Icon size={15} color="#333" />
-                      <p>{v}</p>
-                    </div>
-                  );
-                }
-              )}
+              {/* Experience */}
+              <div className="flex items-center gap-1">
+                <SignalFull02Icon size={15} color="#333" />
+                <p>{v?.experience}</p>
+              </div>
+              {/* jobType */}
+              <div className="flex items-center gap-1">
+                <SignalFull02Icon size={15} color="#333" />
+                <p>{v?.jobType}</p>
+              </div>
+              {/* salaryType */}
+              <div className="flex items-center gap-1">
+                <SignalFull02Icon size={15} color="#333" />
+                <p>{v?.salaryType}</p>
+              </div>
+              {/* salary */}
+              <div className="flex items-center gap-1">
+                <SignalFull02Icon size={15} color="#333" />
+                <p>{v?.salary}</p>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </section>
     </main>
