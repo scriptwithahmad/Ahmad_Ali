@@ -10,3 +10,45 @@ body {
   /* background: white; */
   box-shadow: rgba(145, 158, 171, 0.16) 0px 1px 2px 0px;
 }
+
+main  {
+  color: #333;
+}
+
+main h6 {
+  color: #333;
+  padding: 12px 0px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+main ul {
+  padding: 0px 25px;
+  list-style-type: circle;
+}
+
+main ul li {
+  color: #333;
+  /* line-height: 1.4; */
+  padding-bottom: 4px;
+  font-size: 16px;
+}
+
+/* loaders css here */
+
+.spinner {
+  width: 11.2px;
+  height: 11.2px;
+  animation: spinner-z355kx 1s infinite linear;
+  border-radius: 11.2px;
+  box-shadow: 28px 0px 0 0 #474bff, 17.4px 21.8px 0 0 #474bff,
+    -6.2px 27.2px 0 0 #474bff, -25.2px 12px 0 0 #474bff,
+    -25.2px -12px 0 0 #474bff, -6.2px -27.2px 0 0 #474bff,
+    17.4px -21.8px 0 0 #474bff;
+}
+
+@keyframes spinner-z355kx {
+  to {
+    transform: rotate(360deg);
+  }
+}

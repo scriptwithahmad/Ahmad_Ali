@@ -7,26 +7,32 @@ import {
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { format } from "timeago.js";
+import Loaders from "../components/Loaders";
 
 const index = () => {
   const [open, setOpen] = useState(false);
-
   const [data, setData] = useState([]);
-
-  // console.log(data);
+  const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
+      setIsFetching(true);
       try {
         const res = await fetch("http://localhost:3000/api/jobs");
         const jsonData = await res.json();
         setData(jsonData?.getJob);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsFetching(false);
       }
     };
     getData();
   }, []);
+
+  if (isFetching) {
+    return <Loaders />;
+  }
 
   return (
     <main className="h-screen content-center max-w-[1200px] m-auto">
@@ -56,7 +62,7 @@ const index = () => {
               />
               {/* Actions Overlay */}
               <div
-                className={`bg-gray-100 rounded-lg absolute top-8 p-1.5 transition-all
+                className={`bg-white rounded-lg absolute top-8 p-1.5 transition-all
                   ${open ? "right-10" : "-right-[80%]"}
                 `}
               >

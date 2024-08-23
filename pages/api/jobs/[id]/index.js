@@ -18,6 +18,28 @@ export default async function handler(req, res) {
 
       break;
 
+    case "PUT":
+      try {
+        const updateJob = await jobsSchema.findByIdAndUpdate(
+          req.query.id,
+          {
+            ...req.body,
+          },
+          {
+            new: true,
+          }
+        );
+
+        res.status(200).json({
+          success: true,
+          updateJob,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+
+      break;
+
     default:
       break;
   }
